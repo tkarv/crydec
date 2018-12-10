@@ -4,6 +4,8 @@
 #include "cryptopp/files.h"
 #include "cryptopp/osrng.h"
 #include <fstream>
+#include <iostream>
+#include <iomanip>
 
 int main(int argc, char ** argv) {
 
@@ -34,11 +36,11 @@ int main(int argc, char ** argv) {
 
     std::ofstream out(argv[3]);
     for(int j=0;j<CryptoPP::AES::DEFAULT_KEYLENGTH;j++) {
-        out << key[j];
+        out << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(key[j]);
     }
 
     for(int j=0;j<CryptoPP::AES::DEFAULT_BLOCKSIZE;j++) {
-        out << iv[j];
+        out << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(iv[j]);
     }
 
     out.close();

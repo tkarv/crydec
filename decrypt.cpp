@@ -4,6 +4,7 @@
 #include "cryptopp/files.h"
 #include "cryptopp/osrng.h"
 #include <fstream>
+#include <sstream>
 
 int main(int argc, char ** argv) {
     if(argc != 4) {
@@ -12,15 +13,22 @@ int main(int argc, char ** argv) {
     }
 
     std::ifstream inf(argv[3]);
+    std::string keyiv;
+    inf >> keyiv;
     CryptoPP::SecByteBlock key(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
 
     CryptoPP::SecByteBlock iv(CryptoPP::AES::BLOCKSIZE);
 
+    unsigned int c;
     for(int j=0;j<CryptoPP::AES::DEFAULT_KEYLENGTH;j++) {
-        inf.read(reinterpret_cast<char*>(&key[j]), 1);
+        std::string subs = keyiv.substr(j*2, 2);
+        key[j] = strtol(subs.c_str(), NULL, 16);
+        //inf.read(reinterpret_cast<char*>(&key[j]), 1);
     }
     for(int j=0;j<CryptoPP::AES::DEFAULT_KEYLENGTH;j++) {
-        inf.read(reinterpret_cast<char*>(&iv[j]), 1);
+        std::string subs = keyiv.substr(CryptoPP::AES::DEFAULT_KEYLENGTH*2 + j*2, 2);
+        iv[j] = strtol(subs.c_str(), NULL, 16);
+        //inf.read(reinterpret_cast<char*>(&iv[j]), 1);
     }
 
     CryptoPP::AES::Decryption aesDecryption(key, CryptoPP::AES::DEFAULT_KEYLENGTH);
