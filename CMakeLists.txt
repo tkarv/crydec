@@ -11,5 +11,11 @@ set_target_properties(cryptopp PROPERTIES
 
 add_executable( encrypt encrypt.cpp )
 add_executable( decrypt decrypt.cpp )
+add_executable( generate_rsa_keypair generate_rsa_keypair.cpp)
+add_executable( sign_message_with_private_key sign_message_with_private_key.cpp )
+add_executable( verify_signature verify_signature.cpp)
 target_link_libraries( encrypt cryptopp)
 target_link_libraries( decrypt cryptopp)
+target_link_libraries( generate_rsa_keypair cryptopp )
+target_link_libraries( sign_message_with_private_key cryptopp)
+target_link_libraries( verify_signature cryptopp)
