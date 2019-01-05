@@ -27,7 +27,7 @@ int main(int argc, char ** argv) {
         out << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(key[j]);
     }
 
-    for(int j=0;j<CryptoPP::AES::DEFAULT_BLOCKSIZE;j++) {
+    for(int j=0;j<CryptoPP::AES::BLOCKSIZE;j++) {
         out << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(iv[j]);
     }
 

@@ -26,7 +26,6 @@ int main(int argc, char ** argv) {
         std::string subs = keyiv.substr(j*2, 2);
         key[j] = strtol(subs.c_str(), NULL, 16);
     }
-
     for(int j=0;j<CryptoPP::AES::DEFAULT_KEYLENGTH;j++) {
         std::string subs = keyiv.substr(CryptoPP::AES::DEFAULT_KEYLENGTH*2 + j*2, 2);
         iv[j] = strtol(subs.c_str(), NULL, 16);
@@ -37,7 +36,7 @@ int main(int argc, char ** argv) {
 
     CryptoPP::FileSource fsource (argv[1],
             true,
-            new CryptoPP::StreamTransformationFilter(cbcEncryption, new CryptoPP::FileSink(argv[2], true)),
+            new CryptoPP::StreamTransformationFilter(cbcEncryption, new CryptoPP::FileSink(argv[3], true)),
             true);
 
     fsource.PumpAll();
