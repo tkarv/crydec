@@ -36,7 +36,7 @@ int main(int argc, char ** argv) {
 
     CryptoPP::FileSource fsource (argv[1],
             true,
-            new CryptoPP::StreamTransformationFilter(cbcEncryption, new CryptoPP::FileSink(argv[3], true)),
+            new CryptoPP::StreamTransformationFilter(cbcEncryption, new CryptoPP::FileSink(argv[2], true)),
             true);
 
     fsource.PumpAll();
